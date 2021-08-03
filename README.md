@@ -1,32 +1,38 @@
-[![Build Status](https://travis-ci.org/JSBizon/file-cookie-store.svg?branch=master)](https://travis-ci.org/JSBizon/file-cookie-store)
+# [@root/file-cookie-store](https://github.com/therootcompany/file-cookie-store)
 
-# Introduction
+Store cookies in Netscape-compatible (curl, wget, etc) format text files.
 
-file-cookie-store - this is file store for cookie management library
-[tough cookie](https://github.com/goinstant/tough-cookie 'tough cookie').
-Library allow parallel access to the cookies file based on
-[lockfile](https://github.com/npm/lockfile) library.
+## Features
+
+-   [x] Compatible with
+        [tough cookie@4.x](https://github.com/goinstant/tough-cookie 'tough cookie').
+-   [x] Netscape cookie file format, compatible with curl, wget, etc
+-   [x] Parallel access to the cookies file (using
+        [lockfile](https://github.com/npm/lockfile) library)
 
 ## Synopsis
 
 ```javascript
-var FileCookieStore = require('file-cookie-store');
-var CookieJar = require('tough-cookie').CookieJar;
-
-var jar = new CookieJar(
-    new FileCookieStore('./cookie.txt', { lockfile: true })
-);
+npm install --save tough-cookie@4
+npm install --save @root/file-cookie-store@1
 ```
 
-## Installation
+```javascript
+let Cookie = require('tough-cookie');
+var FileCookieStore = require('@root/file-cookie-store');
 
-If you have npm installed, you can simply type:
+// Initialize
+var cookies_store = new FileCookieStore('./cookie.txt', {
+    auto_sync: false,
+    lockfile: true
+});
+let jar = new Cookie.CookieJar(cookies_store);
 
-          npm install file-cookie-store
-
-Or you can clone this repository using the git command:
-
-          git clone git://github.com/JSBizon/file-cookie-store.git
+// Promisify for async functions
+jar.setCookieAsync = require('util').promisify(jar.setCookie);
+jar.getCookiesAsync = require('util').promisify(jar.getCookies);
+cookies_store.saveAsync = require('util').promisify(cookies_store.save);
+```
 
 ## Usage
 
@@ -48,7 +54,7 @@ Example of using FileCookieStore without auto_sync mode:
 
 ```javascript
 var Q = require('q');
-var FileCookieStore = require('file-cookie-store');
+var FileCookieStore = require('@root/file-cookie-store');
 var TOUGH = require("tough-cookie");
 
 var cookies_store = new FileCookieStore("./cookie.txt", {auto_sync : false});

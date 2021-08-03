@@ -1,16 +1,16 @@
 {
-  "name": "file-cookie-store",
+  "name": "@root/file-cookie-store",
   "version": "1.0.0",
   "description": "Store cookies in Netscape's file",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/JSBizon/file-cookie-store.git"
+    "url": "https://github.com/therootcompany/file-cookie-store.git"
   },
   "scripts": {
-    "prettier": "npx prettier -w '**/*.{js,md,json}'",
-    "lint": "npx jshint index.js",
-    "test": "npx mocha --reporter spec --bail --timeout 10000 test/*.js"
+    "prettier": "npx prettier@2 -w '**/*.{js,md,json}'",
+    "lint": "npx jshint@2 index.js",
+    "test": "npx mocha@2.2 --reporter spec --bail --timeout 10000 test/*.js"
   },
   "keywords": [
     "Netscape",
@@ -23,8 +23,7 @@
     "cookie store"
   ],
   "devDependencies": {
-    "expect.js": "^0.2.0",
-    "mocha": "^2.2.5"
+    "expect.js": "^0.2.0"
   },
   "dependencies": {
     "tough-cookie": "~4.0.0",
@@ -35,7 +34,7 @@
   "author": "Dmitry Nizovtsev (https://github.com/JSBizon)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/JSBizon/file-cookie-store/issues"
+    "url": "https://github.com/therootcompany/file-cookie-store/issues"
   },
   "directories": {
     "test": "test"
